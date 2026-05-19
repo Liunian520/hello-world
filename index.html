@@ -210,7 +210,7 @@
         .name-container {
             position: relative;
             display: inline-block;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             animation: fadeInUp 1.2s ease-out 0.5s both;
         }
 
@@ -227,6 +227,87 @@
             letter-spacing: 0.08em;
             position: relative;
             z-index: 10;
+        }
+
+        .photo-section {
+            margin: 1.5rem 0;
+            animation: fadeInUp 1.2s ease-out 0.7s both;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255, 107, 157, 0.6);
+            box-shadow: 
+                0 0 30px rgba(255, 107, 157, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: photoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes photoGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 107, 157, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1); }
+            50% { box-shadow: 0 0 50px rgba(255, 107, 157, 0.6), inset 0 0 30px rgba(255, 255, 255, 0.15); }
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-frame {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid rgba(255, 209, 220, 0.3);
+            border-radius: 50%;
+            animation: frameRotate 20s linear infinite;
+        }
+
+        @keyframes frameRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .photo-decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: decorationFloat 2s ease-in-out infinite;
+        }
+
+        .photo-decoration.top-left {
+            top: -15px;
+            left: -15px;
+            animation-delay: 0s;
+        }
+
+        .photo-decoration.top-right {
+            top: -15px;
+            right: -15px;
+            animation-delay: 0.5s;
+        }
+
+        .photo-decoration.bottom-left {
+            bottom: -15px;
+            left: -15px;
+            animation-delay: 1s;
+        }
+
+        .photo-decoration.bottom-right {
+            bottom: -15px;
+            right: -15px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes decorationFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(10deg); }
         }
 
         @keyframes nameHeartbeat {
@@ -699,6 +780,17 @@
                 <div class="glow-ring"></div>
                 <div class="glow-ring"></div>
                 <div class="name-text">马钰涵</div>
+            </div>
+
+            <div class="photo-section">
+                <div class="photo-container">
+                    <img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=beautiful%20young%20woman%20portrait%20with%20cat%20face%20filters%20cute%20style%20soft%20lighting%20pink%20background&image_size=portrait_4_3" alt="马钰涵">
+                    <div class="photo-frame"></div>
+                    <span class="photo-decoration top-left">💕</span>
+                    <span class="photo-decoration top-right">💖</span>
+                    <span class="photo-decoration bottom-left">💗</span>
+                    <span class="photo-decoration bottom-right">💝</span>
+                </div>
             </div>
 
             <div class="decorative-line"></div>
