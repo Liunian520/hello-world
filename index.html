@@ -6,11 +6,7 @@
     <title>马钰涵 💕</title>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --primary-color: #ff6b9d;
@@ -22,129 +18,216 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ff9a9e 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #533483 100%);
             background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            animation: gradientShift 20s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             font-family: 'Noto Serif SC', serif;
+            position: relative;
         }
 
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
+            25% { background-position: 25% 25%; }
             50% { background-position: 100% 50%; }
+            75% { background-position: 75% 75%; }
             100% { background-position: 0% 50%; }
         }
 
-        .container {
-            text-align: center;
-            z-index: 10;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .canvas-bg {
+        .stars-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
         }
 
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(255, 107, 157, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 40% 40%, rgba(240, 147, 251, 0.1) 0%, transparent 35%),
+                radial-gradient(ellipse at 60% 60%, rgba(255, 182, 193, 0.1) 0%, transparent 35%);
+            animation: auroraMove 15s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes auroraMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+            25% { transform: translate(-5%, -5%) rotate(2deg); opacity: 0.8; }
+            50% { transform: translate(-10%, 0) rotate(0deg); opacity: 0.6; }
+            75% { transform: translate(-5%, 5%) rotate(-2deg); opacity: 0.8; }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatUp 8s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(720deg) scale(1); opacity: 0; }
+        }
+
+        .balloon {
+            position: fixed;
+            font-size: 3rem;
+            animation: balloonFloat 12s ease-in-out infinite;
+            z-index: 3;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .balloon:hover {
+            transform: scale(1.3) !important;
+            filter: brightness(1.2);
+        }
+
+        @keyframes balloonFloat {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(-5deg); }
+            25% { transform: translateY(-30px) translateX(15px) rotate(0deg); }
+            50% { transform: translateY(-50px) translateX(-10px) rotate(5deg); }
+            75% { transform: translateY(-25px) translateX(-15px) rotate(0deg); }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 60px rgba(255, 107, 157, 0.1);
+        }
+
+        .header-section {
+            margin-bottom: 2rem;
+        }
+
         .main-title {
-            font-size: 8rem;
+            font-size: clamp(4rem, 15vw, 9rem);
             font-family: 'Ma Shan Zheng', cursive;
-            background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ffd1dc, #ff6b9d);
-            background-size: 300% 300%;
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ffd1dc, #fff, #ffd1dc, #ff8fab, #ff6b9d);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: textGlow 3s ease-in-out infinite, fadeInUp 1.5s ease-out;
-            text-shadow: 0 0 40px rgba(255, 107, 157, 0.5);
-            margin-bottom: 1rem;
-            letter-spacing: 0.2em;
+            animation: textGlow 4s ease-in-out infinite, fadeInScale 1.5s ease-out;
+            text-shadow: 0 0 60px rgba(255, 107, 157, 0.4);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+            display: inline-block;
         }
 
         @keyframes textGlow {
-            0%, 100% { background-position: 0% 50%; filter: brightness(1); }
-            50% { background-position: 100% 50%; filter: brightness(1.2); }
+            0%, 100% { background-position: 0% 50%; filter: brightness(1) drop-shadow(0 0 30px rgba(255,107,157,0.5)); }
+            50% { background-position: 100% 50%; filter: brightness(1.3) drop-shadow(0 0 50px rgba(255,107,157,0.8)); }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .subtitle {
-            font-size: 3rem;
+            font-size: clamp(1.5rem, 5vw, 3rem);
             font-family: 'Ma Shan Zheng', cursive;
             color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-                         0 0 40px rgba(255, 107, 157, 0.6);
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 107, 157, 0.6),
+                0 0 60px rgba(255, 107, 157, 0.4);
             animation: fadeInUp 1.5s ease-out 0.3s both, pulse 2s ease-in-out infinite;
             margin-bottom: 2rem;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.2em;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
 
         .name-container {
             position: relative;
             display: inline-block;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             animation: fadeInUp 1.5s ease-out 0.6s both;
         }
 
         .name-text {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 6rem;
+            font-size: clamp(3rem, 12vw, 7rem);
             background: linear-gradient(135deg, #ff6b9d, #ff8fab, #ffd1dc, #ff6b9d, #ff8fab);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: nameHeartbeat 1.5s ease-in-out infinite, textGlow 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
-            letter-spacing: 0.15em;
+            animation: nameHeartbeat 1.2s ease-in-out infinite, textGlow 4s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(255, 107, 157, 0.6);
+            letter-spacing: 0.1em;
             position: relative;
             z-index: 10;
-            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.6));
         }
 
         @keyframes nameHeartbeat {
-            0%, 100% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.6));
-            }
-            10% { 
-                transform: scale(1.08);
-                filter: drop-shadow(0 0 40px rgba(255, 107, 157, 0.9));
-            }
-            20% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.6));
-            }
-            30% { 
-                transform: scale(1.08);
-                filter: drop-shadow(0 0 40px rgba(255, 107, 157, 0.9));
-            }
-            40% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.6));
-            }
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.08); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.06); }
+            60% { transform: scale(1); }
         }
 
         .glow-ring {
@@ -152,81 +235,44 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 400px;
-            height: 200px;
-            border: 3px solid rgba(255, 107, 157, 0.3);
             border-radius: 50%;
-            animation: ripple 2s ease-out infinite;
+            animation: ripple 2.5s ease-out infinite;
+            pointer-events: none;
+        }
+
+        .glow-ring:nth-child(1) {
+            width: 350px;
+            height: 180px;
+            border: 2px solid rgba(255, 107, 157, 0.4);
         }
 
         .glow-ring:nth-child(2) {
-            animation-delay: 0.5s;
+            width: 400px;
+            height: 200px;
+            border: 2px solid rgba(255, 143, 171, 0.3);
+            animation-delay: 0.4s;
         }
 
         .glow-ring:nth-child(3) {
-            animation-delay: 1s;
+            width: 450px;
+            height: 220px;
+            border: 2px solid rgba(255, 209, 220, 0.2);
+            animation-delay: 0.8s;
         }
 
         @keyframes ripple {
-            0% {
-                transform: translate(-50%, -50%) scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        .love-message {
-            font-size: 1.3rem;
-            color: white;
-            line-height: 2.2;
-            margin: 2rem 0;
-            animation: fadeInUp 1.5s ease-out 0.9s both;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: justify;
-            padding: 0 1rem;
-        }
-
-        .love-message .intro {
-            font-size: 1.5rem;
-            color: #ffd1dc;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .love-message .content {
-            margin: 1.5rem 0;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .love-message .content:nth-child(2) { animation-delay: 1.2s; }
-        .love-message .content:nth-child(3) { animation-delay: 1.5s; }
-        .love-message .content:nth-child(4) { animation-delay: 1.8s; }
-
-        .love-message .signature {
-            margin-top: 3rem;
-            text-align: right;
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2rem;
-            color: #ffd1dc;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 2.2s forwards, pulse 3s ease-in-out infinite 2.2s;
+            0% { transform: translate(-50%, -50%) scale(0.7); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
         }
 
         .decorative-line {
-            width: 200px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, white, transparent);
-            margin: 2rem auto;
+            width: 250px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255,107,157,0.8), rgba(255,209,220,0.6), rgba(255,107,157,0.8), transparent);
+            margin: 2.5rem auto;
             animation: fadeInUp 1.5s ease-out 1s both;
             position: relative;
+            border-radius: 2px;
         }
 
         .decorative-line::before,
@@ -235,52 +281,177 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            animation: bounce 1s ease-in-out infinite;
         }
 
-        .decorative-line::before { left: -30px; }
-        .decorative-line::after { right: -30px; }
+        .decorative-line::before { 
+            left: -35px; 
+            animation-delay: 0s;
+        }
+        .decorative-line::after { 
+            right: -35px; 
+            animation-delay: 0.3s;
+        }
 
-        .music-player {
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-60%) scale(1.2); }
+        }
+
+        .love-message {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 2.4;
+            margin: 2rem 0;
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+            padding: 0 1rem;
+        }
+
+        .love-message .intro {
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
+            color: #ffd1dc;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: block;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .love-message .content {
+            margin: 1.8rem 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            background: linear-gradient(90deg, transparent, rgba(255,107,157,0.1), transparent);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            border-left: 3px solid rgba(255, 107, 157, 0.5);
+        }
+
+        .love-message .content:nth-child(2) { animation-delay: 1.2s; }
+        .love-message .content:nth-child(3) { animation-delay: 1.6s; }
+        .love-message .content:nth-child(4) { animation-delay: 2s; }
+
+        .love-message .signature {
+            margin-top: 3rem;
+            text-align: right;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(1.5rem, 6vw, 2.2rem);
+            color: #ffd1dc;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2.5s forwards, pulse 3s ease-in-out infinite 2.5s;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .music-section {
             margin: 3rem auto;
             text-align: center;
-            animation: fadeInUp 1.5s ease-out 2.5s both;
+            animation: fadeInUp 1.5s ease-out 2.8s both;
+            position: relative;
         }
 
         .music-label {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
             color: #ffd1dc;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
-        .music-label::before,
-        .music-label::after {
-            content: '🎵';
-            margin: 0 0.5rem;
+        .music-player {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: rgba(255, 107, 157, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 107, 157, 0.15);
+            transition: all 0.3s ease;
         }
 
-        .music-iframe {
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                        0 0 40px rgba(255, 107, 157, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .music-player:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 107, 157, 0.25);
         }
 
-        .music-iframe:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4),
-                        0 0 60px rgba(255, 107, 157, 0.4);
+        .play-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 107, 157, 0.8);
+        }
+
+        .play-btn i {
+            color: white;
+            font-size: 18px;
+            margin-left: 3px;
+        }
+
+        .song-info {
+            text-align: left;
+        }
+
+        .song-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .song-artist {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .progress-bar {
+            width: 150px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #ffd1dc);
+            border-radius: 2px;
+            animation: progress 180s linear infinite;
+        }
+
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
         }
 
         .footer-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 5vw, 2rem);
             color: white;
             margin-top: 3rem;
-            animation: fadeInUp 1.5s ease-out 2.1s both, twinkle 2s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 1.5s ease-out 3s both, twinkle 2s ease-in-out infinite;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 107, 157, 0.5);
         }
 
         @keyframes twinkle {
@@ -288,143 +459,230 @@
             50% { opacity: 0.7; }
         }
 
-        .sparkles {
+        .click-hearts {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: 100;
             pointer-events: none;
-            z-index: 2;
         }
 
-        .sparkle {
+        .click-heart {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: white;
-            border-radius: 50%;
-            animation: sparkle 3s ease-in-out infinite;
+            font-size: 1.5rem;
+            animation: clickFloat 1s ease-out forwards;
+            pointer-events: none;
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
+        @keyframes clickFloat {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-100px) scale(0.3); }
         }
 
-        .rose {
-            position: fixed;
+        .interactive-section {
+            margin-top: 2rem;
+            animation: fadeInUp 1.5s ease-out 3.2s both;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 107, 157, 0.15);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            min-width: 80px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 107, 157, 0.25);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+        }
+
+        .countdown-number {
+            font-family: 'Ma Shan Zheng', cursive;
             font-size: 2rem;
-            animation: floatRose 8s ease-in-out infinite;
-            opacity: 0.7;
-            z-index: 5;
+            color: #ffd1dc;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.6);
         }
 
-        .rose:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-        .rose:nth-child(2) { top: 20%; right: 8%; animation-delay: 1s; }
-        .rose:nth-child(3) { bottom: 15%; left: 10%; animation-delay: 2s; }
-        .rose:nth-child(4) { bottom: 25%; right: 5%; animation-delay: 3s; }
-
-        @keyframes floatRose {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
+        .countdown-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.3rem;
         }
 
-        .aurora {
+        .like-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.8), rgba(255, 143, 171, 0.8));
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.3rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .like-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.6);
+        }
+
+        .like-button.liked {
+            background: linear-gradient(135deg, #d63384, #ff6b9d);
+        }
+
+        .like-count {
+            font-size: 1.2rem;
+        }
+
+        .cursor-heart {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.1) 0%, transparent 40%);
-            animation: auroraShift 10s ease-in-out infinite;
-            z-index: 0;
+            font-size: 1.2rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: cursorFloat 0.5s ease-out forwards;
         }
 
-        @keyframes auroraShift {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
+        @keyframes cursorFloat {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
         }
 
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
+        .mobile-hint {
+            display: none;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 1rem;
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
             .main-title {
-                font-size: 5rem;
+                font-size: clamp(3rem, 18vw, 7rem);
             }
-            
+
             .subtitle {
-                font-size: 2rem;
+                font-size: clamp(1.2rem, 6vw, 2.2rem);
             }
-            
+
             .name-text {
-                font-size: 4rem;
+                font-size: clamp(2.5rem, 15vw, 5rem);
             }
-            
-            .glow-ring {
-                width: 300px;
-                height: 150px;
-            }
-            
+
+            .glow-ring:nth-child(1) { width: 250px; height: 130px; }
+            .glow-ring:nth-child(2) { width: 300px; height: 150px; }
+            .glow-ring:nth-child(3) { width: 350px; height: 170px; }
+
             .love-message {
-                font-size: 1.2rem;
-                padding: 0 1rem;
+                font-size: 1.1rem;
+                padding: 0;
             }
-            
+
             .footer-text {
                 font-size: 1.4rem;
+            }
+
+            .music-player {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .song-info {
+                text-align: center;
+            }
+
+            .progress-bar {
+                width: 120px;
+            }
+
+            .countdown-item {
+                padding: 1rem 1.5rem;
+                min-width: 60px;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+
+            .mobile-hint {
+                display: block;
             }
         }
 
         @media (max-width: 480px) {
             .main-title {
-                font-size: 4rem;
+                font-size: clamp(2.5rem, 20vw, 5rem);
             }
-            
+
             .subtitle {
-                font-size: 1.6rem;
-                letter-spacing: 0.15em;
+                font-size: clamp(1rem, 7vw, 1.8rem);
+                letter-spacing: 0.1em;
             }
 
             .name-text {
-                font-size: 3rem;
+                font-size: clamp(2rem, 18vw, 4rem);
+            }
+
+            .like-button {
+                padding: 0.8rem 1.8rem;
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="stars-bg" id="stars"></div>
     <div class="aurora"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
     
-    <canvas class="canvas-bg" id="heartCanvas"></canvas>
-    
-    <div class="sparkles" id="sparkles"></div>
-    
-    <div class="rose">🌹</div>
-    <div class="rose">💐</div>
-    <div class="rose">🌸</div>
-    <div class="rose">🌺</div>
-    
+    <div class="balloon" style="top: 10%; left: 5%; animation-delay: 0s;">🎈</div>
+    <div class="balloon" style="top: 5%; right: 10%; animation-delay: 2s;">🎈</div>
+    <div class="balloon" style="bottom: 20%; left: 8%; animation-delay: 4s;">🎈</div>
+    <div class="balloon" style="bottom: 10%; right: 5%; animation-delay: 6s;">🎈</div>
+    <div class="balloon" style="top: 30%; left: 15%; animation-delay: 8s;">🎈</div>
+
+    <div class="click-hearts" id="clickHearts"></div>
+
     <div class="content-wrapper">
         <div class="container">
-            <h1 class="main-title">520</h1>
-            <h2 class="subtitle">我爱你</h2>
-            
+            <div class="header-section">
+                <h1 class="main-title">520</h1>
+                <h2 class="subtitle">我爱你</h2>
+            </div>
+
             <div class="name-container">
                 <div class="glow-ring"></div>
                 <div class="glow-ring"></div>
                 <div class="glow-ring"></div>
                 <div class="name-text">马钰涵</div>
             </div>
-            
+
             <div class="decorative-line"></div>
-            
+
             <div class="love-message">
-                <div class="intro">相识261天，一日夫妻百日恩</div>
+                <span class="intro">相识261天，一日夫妻百日恩</span>
                 
                 <div class="content">
                     不管怎么说我们也相识有261天啦，今天还是要给你安排一个表白。
@@ -444,26 +702,171 @@
                     致东北第一美人，马钰涵 💕
                 </div>
             </div>
-            
-            <div class="music-player">
-                <div class="music-label">April Encounter</div>
-                <iframe class="music-iframe"
-                    frameborder="no" 
-                    border="0" 
-                    marginwidth="0" 
-                    marginheight="0" 
-                    width="350" 
-                    height="90"
-                    src="https://music.163.com/outchain/player?type=2&id=551400874&auto=1&height=66">
-                </iframe>
+
+            <div class="interactive-section">
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">261</div>
+                        <div class="countdown-label">天</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">0</div>
+                        <div class="countdown-label">时</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">0</div>
+                        <div class="countdown-label">分</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">0</div>
+                        <div class="countdown-label">秒</div>
+                    </div>
+                </div>
+
+                <button class="like-button" id="likeBtn">
+                    <span>💕</span>
+                    <span class="like-count" id="likeCount">1314</span>
+                </button>
+                <p class="mobile-hint">点击屏幕可以飘出爱心哦~</p>
             </div>
-            
+
+            <div class="music-section">
+                <div class="music-label">🎵 April Encounter 🎵</div>
+                <div class="music-player">
+                    <div class="play-btn" id="playBtn">
+                        <i>▶</i>
+                    </div>
+                    <div class="song-info">
+                        <div class="song-title">April Encounter</div>
+                        <div class="song-artist">Luv Resonance</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <p class="footer-text">Forever and Always 💕</p>
         </div>
     </div>
 
     <script>
-        const canvas = document.getElementById('heartCanvas');
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(star);
+            }
+        }
+
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['💕', '💗', '💖', '💘', '💝'];
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                container.appendChild(heart);
+            }
+        }
+
+        function handleClick(e) {
+            const container = document.getElementById('clickHearts');
+            const hearts = ['💕', '💗', '💖', '💘', '💝', '💓', '💞'];
+            const count = 5 + Math.floor(Math.random() * 5);
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'click-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = e.clientX + 'px';
+                heart.style.top = e.clientY + 'px';
+                heart.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+                heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+                heart.style.animationDelay = Math.random() * 0.3 + 's';
+                heart.style.animationDuration = (Math.random() * 0.5 + 0.8) + 's';
+                container.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+
+        let likeCount = 1314;
+        const likeBtn = document.getElementById('likeBtn');
+        const likeCountEl = document.getElementById('likeCount');
+
+        likeBtn.addEventListener('click', () => {
+            likeCount++;
+            likeCountEl.textContent = likeCount;
+            likeBtn.classList.add('liked');
+            
+            setTimeout(() => {
+                const rect = likeBtn.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                
+                for (let i = 0; i < 8; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'cursor-heart';
+                    heart.textContent = '💕';
+                    heart.style.left = x + 'px';
+                    heart.style.top = y + 'px';
+                    heart.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 500);
+                }
+            }, 100);
+        });
+
+        let isPlaying = false;
+        const playBtn = document.getElementById('playBtn');
+        
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playBtn.innerHTML = isPlaying ? '<i>⏸</i>' : '<i>▶</i>';
+            
+            const audio = document.createElement('audio');
+            audio.src = 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2teleEoAMLi/t3QABw0sR2Z/lJqUj4+Vn6evraGUgm9jXFpeZHVpbW1xcnNzdHV2d3h5ent8fX5/gIGCg4SFhoaHiImJiouLjI2Njo6PkJCRkZKSk5OTlJSUlZWVlpaWl5eXmJiYmJmZmZqampqbm5ucnJycnZ2dnp6en5+fn6CgoKCgoaGhoqKio6OjpKSkpOTlJSUlZWVlpaWlp6enp+fn6ChoaGgoKCgoqKio6OjpKSk5OTlJSUlZWVlpaWl5eXmJiYmJiZmZmppampubm5yc3JycnZ2dnp6en5+foKCgI';
+            audio.loop = true;
+            audio.volume = 0.3;
+            
+            if (isPlaying) {
+                audio.play().catch(() => {});
+            }
+        });
+
+        function updateCountdown() {
+            const startDate = new Date('2025-08-22');
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.className = 'canvas-bg';
+        canvas.id = 'heartCanvas';
+        document.body.appendChild(canvas);
+        
         const ctx = canvas.getContext('2d');
         
         function resizeCanvas() {
@@ -482,19 +885,19 @@
             reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = canvas.height + Math.random() * 100;
-                this.size = Math.random() * 15 + 8;
-                this.speedY = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 2;
+                this.size = Math.random() * 12 + 6;
+                this.speedY = Math.random() * 1.5 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 1.5;
                 this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.05;
-                this.opacity = Math.random() * 0.6 + 0.4;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.04;
+                this.opacity = Math.random() * 0.5 + 0.3;
                 this.wobble = Math.random() * Math.PI * 2;
-                this.wobbleSpeed = Math.random() * 0.05 + 0.02;
+                this.wobbleSpeed = Math.random() * 0.04 + 0.015;
             }
             
             update() {
                 this.y -= this.speedY;
-                this.x += Math.sin(this.wobble) * 0.5 + this.speedX;
+                this.x += Math.sin(this.wobble) * 0.4 + this.speedX;
                 this.rotation += this.rotationSpeed;
                 this.wobble += this.wobbleSpeed;
                 
@@ -509,31 +912,25 @@
                 ctx.rotate(this.rotation);
                 ctx.globalAlpha = this.opacity;
                 
+                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+                gradient.addColorStop(0, 'rgba(255, 209, 220, 0.9)');
+                gradient.addColorStop(0.5, 'rgba(255, 143, 171, 0.7)');
+                gradient.addColorStop(1, 'rgba(255, 107, 157, 0.5)');
+                
                 ctx.beginPath();
                 const s = this.size;
                 ctx.moveTo(0, s / 4);
                 ctx.bezierCurveTo(-s / 2, -s / 2, -s, s / 4, 0, s);
                 ctx.bezierCurveTo(s, s / 4, s / 2, -s / 2, 0, s / 4);
-                ctx.fillStyle = this.getHeartColor();
+                ctx.fillStyle = gradient;
                 ctx.fill();
                 
                 ctx.restore();
             }
-            
-            getHeartColor() {
-                const colors = [
-                    'rgba(255, 107, 157, 0.8)',
-                    'rgba(255, 143, 171, 0.8)',
-                    'rgba(255, 209, 220, 0.8)',
-                    'rgba(214, 51, 132, 0.8)',
-                    'rgba(248, 180, 217, 0.8)'
-                ];
-                return colors[Math.floor(Math.random() * colors.length)];
-            }
         }
         
         const hearts = [];
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 25; i++) {
             const heart = new Heart();
             heart.y = Math.random() * canvas.height;
             hearts.push(heart);
@@ -550,36 +947,27 @@
             requestAnimationFrame(animate);
         }
         
-        animate();
-        
-        function createSparkles() {
-            const container = document.getElementById('sparkles');
-            for (let i = 0; i < 20; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.style.left = Math.random() * 100 + '%';
-                sparkle.style.top = Math.random() * 100 + '%';
-                sparkle.style.animationDelay = Math.random() * 3 + 's';
-                sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                container.appendChild(sparkle);
-            }
-        }
-        
-        createSparkles();
-        
         document.addEventListener('mousemove', (e) => {
             hearts.forEach(heart => {
                 const dx = e.clientX - heart.x;
                 const dy = e.clientY - heart.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
-                if (distance < 150) {
-                    const force = (150 - distance) / 150;
-                    heart.x -= dx * force * 0.02;
-                    heart.y -= dy * force * 0.02;
+                if (distance < 120) {
+                    const force = (120 - distance) / 120;
+                    heart.x -= dx * force * 0.015;
+                    heart.y -= dy * force * 0.015;
                 }
             });
         });
+
+        createStars();
+        createFloatingHearts();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        animate();
+        
+        document.addEventListener('click', handleClick);
     </script>
 </body>
 </html>
