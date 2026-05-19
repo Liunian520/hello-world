@@ -784,7 +784,7 @@
 
             <div class="photo-section">
                 <div class="photo-container">
-                    <img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=beautiful%20young%20woman%20portrait%20with%20cat%20face%20filters%20cute%20style%20soft%20lighting%20pink%20background&image_size=portrait_4_3" alt="马钰涵">
+                    <img src="https://picsum.photos/seed/love/200/200" alt="马钰涵">
                     <div class="photo-frame"></div>
                     <span class="photo-decoration top-left">💕</span>
                     <span class="photo-decoration top-right">💖</span>
@@ -955,24 +955,56 @@
 
         let isPlaying = false;
         const playBtn = document.getElementById('playBtn');
+        let audioElement = null;
+        
+        function initAudio() {
+            audioElement = document.createElement('audio');
+            audioElement.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+            audioElement.loop = true;
+            audioElement.volume = 0.3;
+            audioElement.preload = 'auto';
+            document.body.appendChild(audioElement);
+        }
+        
+        function playAudio() {
+            if (audioElement) {
+                audioElement.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = '<i>⏸</i>';
+                }).catch(() => {});
+            }
+        }
+        
+        function pauseAudio() {
+            if (audioElement) {
+                audioElement.pause();
+                isPlaying = false;
+                playBtn.innerHTML = '<i>▶</i>';
+            }
+        }
+        
+        initAudio();
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                playAudio();
+            }, 3000);
+        });
+        
+        document.addEventListener('click', playAudio);
+        document.addEventListener('touchstart', playAudio);
         
         playBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            isPlaying = !isPlaying;
-            playBtn.innerHTML = isPlaying ? '<i>⏸</i>' : '<i>▶</i>';
-            
-            const audio = document.createElement('audio');
-            audio.src = 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2teleEoAMLi/t3QABw0sR2Z/lJqUj4+Vn6evraGUgm9jXFpeZHVpbW1xcnNzdHV2d3h5ent8fX5/gIGCg4SFhoaHiImJiouLjI2Njo6PkJCRkZKSk5OTlJSUlZWVlpaWl5eXmJiYmJmZmZqampqbm5ucnJycnZ2dnp6en5+fn6CgoKCgoaGhoqKio6OjpKSkpOTlJSUlZWVlpaWlp6enp+fn6ChoaGgoKCgoqKio6OjpKSk5OTlJSUlZWVlpaWl5eXmJiYmJiZmZmppampubm5yc3JycnZ2dnp6en5+foKCgI';
-            audio.loop = true;
-            audio.volume = 0.3;
-            
             if (isPlaying) {
-                audio.play().catch(() => {});
+                pauseAudio();
+            } else {
+                playAudio();
             }
         });
 
         function updateCountdown() {
-            const startDate = new Date('2025-08-22');
+            const startDate = new Date('2025-08-31');
             const now = new Date();
             const diff = now - startDate;
             
